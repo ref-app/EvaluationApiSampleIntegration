@@ -31,7 +31,10 @@ namespace Talentech.EvaluationApi.SamplePartnerApiConnector
         {
             services.AddMvcCore()
                 .AddAuthorization()
-                .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+                .AddJsonOptions(options => {
+                    options.JsonSerializerOptions.PropertyNameCaseInsensitive = false;
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                    });
 
             var tokenServerConfig = Configuration.GetSection("TokenServerConfig").Get<TokenServerConfig>();
             var evaluationApiConfig = Configuration.GetSection("EvaluationApiConfig").Get<EvaluationApiConfig>();
@@ -74,7 +77,7 @@ namespace Talentech.EvaluationApi.SamplePartnerApiConnector
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
