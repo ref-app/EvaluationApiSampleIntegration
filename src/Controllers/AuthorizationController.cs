@@ -53,8 +53,8 @@ namespace Talentech.EvaluationApi.SamplePartnerApiConnector.Controllers
         {
             var token = new ExamplePartnerTokenDto
             {
-                CustomerAccountId = "RandomAccountId",
-                PartnerApiRefreshToken = "PartnerApiRefreshToken"
+                customerAccountId = "RandomAccountId",
+                partnerApiRefreshToken = "PartnerApiRefreshToken"
             };
             return Ok(token);
         }

@@ -30,11 +30,13 @@ namespace Talentech.EvaluationApi.SamplePartnerApiConnector
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvcCore()
-                .AddAuthorization()
+                .AddAuthorization()                
                 .AddJsonOptions(options => {
                     options.JsonSerializerOptions.PropertyNameCaseInsensitive = false;
+                    options.JsonSerializerOptions.PropertyNamingPolicy = null;
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-                    });
+                    });                
+                
 
             var tokenServerConfig = Configuration.GetSection("TokenServerConfig").Get<TokenServerConfig>();
             var evaluationApiConfig = Configuration.GetSection("EvaluationApiConfig").Get<EvaluationApiConfig>();
@@ -45,8 +47,9 @@ namespace Talentech.EvaluationApi.SamplePartnerApiConnector
             services.AddHttpClient<IEvaluationApiClient, EvaluationApiClient>();
             services.AddHttpClient<ITokenClient, TokenClient>();
             services.AddSingleton<StatusUpdateService>();
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Latest);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sample Partner API Connector", Version = "v1" });

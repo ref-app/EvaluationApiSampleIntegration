@@ -8,7 +8,7 @@
     /// </summary>
     public class ExamplePartnerTokenDto
     {
-        public string CustomerAccountId { get; set; }
-        public string PartnerApiRefreshToken { get; set; }
+        public string customerAccountId { get; set; }
+        public string partnerApiRefreshToken { get; set; }
     }
 }
